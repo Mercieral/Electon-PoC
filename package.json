@@ -1,0 +1,32 @@
+{
+  "name": "electron-PoC",
+  "description": "Simple Ember/Electron application to test the proof of concept of the tool",
+  "license": "",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "express": "4.2.0",
+    "express-session": "1.2.0",
+    "node-rest-client": "1.8.0"
+  },
+  "devDependencies": {
+    "babel": "5.8.29",
+    "ember-template-compiler": "1.8.0",
+    "grunt": "http://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz",
+    "grunt-ember-handlebars": "0.8.0",
+    "grunt-ember-templates": "0.4.23",
+    "sync-exec": "0.6.2",
+    "handlebars": "2.0.0",
+    "fs-readdir-recursive": "0.0.2",
+    "es6-module-jstransform": "0.1.4",
+    "grunt-autoprefixer": "0.7.2",
+    "grunt-sass": "1.0.0",
+    "es6-transpiler": "0.7.18"
+
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=0.12.7 <4.0.0",
+    "npm": ">=2.11.3 <2.14.2"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "greenlight-guru-client",
+  "dependencies": {
+    "ember": "1.10.0",
+    "ember-graph-dist": "https://github.com/stingerlabs/ember-graph.git#EG-support-paginated-metadata",
+    "handlebars": "1.3.0",
+    "jquery": "2.1.1",
+    "jquery-cookie": "https://github.com/stingerlabs/js-cookie.git#1.4.0"
+  },
+  "devDependencies": {},
+  "private": true
+}
