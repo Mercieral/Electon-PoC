@@ -129,13 +129,16 @@ function concatJs(outputFile, include, minified) {
 }
 
 function writeIndexFile(files, testMode, includeTestem) {
-	// var template = Hanldebars.compile(fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'}));
-	// var html = template({files: files, test: !!testMode, testem: !!includeTestem});
-	// fs.writeFileSync('build/index.html', html);
+    //If using this, be sure to have no ember helpers in index.hbs
+	var template = Hanldebars.compile(fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'}));
+	var html = template({files: files, test: !!testMode, testem: !!includeTestem});
+	fs.writeFileSync('build/index.html', html);
 
-	var compiler = require('ember-template-compiler');
-	var input = fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'})
-	var template = compiler.precompile(input, false);
-	fs.writeFileSync('build/index.html', template);
+    //attempt to use Ember's template compiler to provide Ember helper functionality (ex. link-to)
+    // var compiler = require('ember-template-compiler');
+    // var input = fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'})
+    // var template = compiler.EmberHandlebars.compile(input);
+    // var html = template({files: files, test: !!testMode, testem: !!includeTestem});
+    // fs.writeFileSync('build/index.html', template);
 
 }

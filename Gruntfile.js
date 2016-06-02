@@ -17,6 +17,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build_app_js', ['ember_handlebars:all', 'transpile']);
     grunt.registerTask('build_app_css', ['sass:app', 'autoprefixer:app']);
-    grunt.registerTask('build_source', ['make_build_folder', 'build_app_js', 'build_app_css']);
+    grunt.registerTask('build_source', ['make_build_folder', 'copy_assets', 'build_app_js', 'build_app_css']);
     grunt.registerTask('build_dev', ['bower_update', 'build_source', 'bower_develop']);
 }

@@ -1,9 +1,3 @@
-import 'util/offline';
-import './util/helpers';
-
-import { logError } from './util/error';
-Em.onerror = (error) => logError(error);
-
 // Create Application
 let App = window.App = Ember.Application.create();
 
@@ -12,8 +6,11 @@ let App = window.App = Ember.Application.create();
 App.Store = null;
 
 // Router
-import { routeMap } from './router';
-App.Router.map(routeMap);
+App.Router.map(function(){
+    this.resource('main', {path: '/'});
+    this.route('documents');
+    this.route('about');
+});
 App.Router.reopen({
     location: 'history'
 });
