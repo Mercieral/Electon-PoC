@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 			return '/' + file;
 		});
 
-		writeIndexFile(files, testMode, includeTestem);
+		//writeIndexFile(files, testMode, includeTestem);
 
 		sh('cp -r lib build/');
 	}
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 		concatCss('vendor_minimal.css', MINIMAL_RELEASE, false);
 		concatJs('vendor_minimal.js', MINIMAL_RELEASE, false);
 
-		writeIndexFile(['/javascripts/vendor_full.js']);
+		//writeIndexFile(['/javascripts/vendor_full.js']);
 	});
 
 	grunt.registerTask('bower_release', function() {
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
 		concatCss('vendor_minimal.css', MINIMAL_RELEASE, true);
 		concatJs('vendor_minimal.js', MINIMAL_RELEASE, true);
 
-		writeIndexFile(['/javascripts/vendor_full.js']);
+		//writeIndexFile(['/javascripts/vendor_full.js']);
 	});
 };
 
@@ -129,14 +129,14 @@ function concatJs(outputFile, include, minified) {
 }
 
 function writeIndexFile(files, testMode, includeTestem) {
-    //If using this, be sure to have no ember helpers in index.hbs
-	var template = Hanldebars.compile(fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'}));
+    //If using this, be sure to have no ember helpers in index.html
+	var template = Hanldebars.compile(fs.readFileSync('app/templates/index.html', {encoding: 'utf8'}));
 	var html = template({files: files, test: !!testMode, testem: !!includeTestem});
 	fs.writeFileSync('build/index.html', html);
 
     //attempt to use Ember's template compiler to provide Ember helper functionality (ex. link-to)
     // var compiler = require('ember-template-compiler');
-    // var input = fs.readFileSync('app/templates/index.hbs', {encoding: 'utf8'})
+    // var input = fs.readFileSync('app/templates/index.html', {encoding: 'utf8'})
     // var template = compiler.EmberHandlebars.compile(input);
     // var html = template({files: files, test: !!testMode, testem: !!includeTestem});
     // fs.writeFileSync('build/index.html', template);

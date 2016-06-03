@@ -1,5 +1,5 @@
 {
-  "name": "greenlight-guru-client",
+  "name": "electon-PoC",
   "dependencies": {
     "ember": "1.10.0",
     "ember-graph-dist": "https://github.com/stingerlabs/ember-graph.git#EG-support-paginated-metadata",

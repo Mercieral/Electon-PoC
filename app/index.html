@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electron-Ember PoC</title>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="javascripts/jquery.js"></script>
+
+</head>
+<body>
+    <div id="app"></div>
+    <h1> Ember/Electron/Grunt PoC</h1>
+
+    <script type="text/x-handlebars" data-template-name="main">
+        <section id="app">
+            <h3> Home Page</h3>
+            <p>{{#link-to "about" }} about {{/link-to}}</p>
+            <p>{{#link-to "docs" }} docs {{/link-to}}</p>
+        </section>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="about">
+        <p> This Proof of concept will be used to determine how well electron will be able to wrap the GreenLight.Guru Web application into a packaged desktop application. It is using ember 1.10, grunt, and node 4.4.0 as its dependencies to match the web application.</p>
+        <p> Written by Aaron Mercier</p>
+        {{#link-to 'main'}} Back to main{{/link-to}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="docs">
+        <p> Here are some fake documents to examine REST API</p>
+        <div id="data"> </div>
+        {{#link-to 'main'}} Back to main{{/link-to}}
+    </script>
+
+
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/handlebars.js"></script>
+    <script src="javascripts/ember.prod.js"></script>
+    <script src="javascripts/ember-template-compiler.js"></script>
+    <script src="javascripts/app.js"></script>
+</body>
+</html>
