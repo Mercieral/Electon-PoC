@@ -6,7 +6,7 @@ var transform = require('es6-module-jstransform');
 var es6transpiler = require('es6-transpiler');
 
 var PATH_TO_JS = path.resolve(process.cwd() + '/app/js');
-var OUTPUT_FILE = path.resolve(process.cwd() + '/build/javascripts/app.js');
+var OUTPUT_FILE = path.resolve(process.cwd() + '/build/app.js');
 
 var LAST_TRANSPILE = 0;
 var MODULE_CACHE = {};

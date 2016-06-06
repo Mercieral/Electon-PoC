@@ -1,13 +1,17 @@
 {
   "name" : "Electron-PoC",
   "version" : "0.1.0",
-  "description" : "Ember application wrapped in electron for PoC",
   "main" : "main.js",
+  "description": "Simple Ember/Electron application to test the proof of concept of the tool",
+  "license": "",
+  "scripts": {
+    "start": "node ./start-electron.js"
+  },
   "dependencies": {
-    "ember": "1.10.0",
-    "ember-graph-dist": "https://github.com/stingerlabs/ember-graph.git#EG-support-paginated-metadata",
+    "request": "2.55.0",
+    "electron": "^0.4.1",
+    "electron-prebuilt": "^1.2.1",
     "handlebars": "1.3.0",
-    "jquery": "2.1.1",
-    "jquery-cookie": "https://github.com/stingerlabs/js-cookie.git#1.4.0"
+    "jquery": "2.1.1"
   }
 }

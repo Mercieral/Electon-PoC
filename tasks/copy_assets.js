@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 		sh('cp app/index.html build/index.html');
         sh('cp app/main.js build/main.js');
         sh('cp app/package.json build/package.json');
+		sh('cp app/start-electron.js build/start-electron.js');
+		sh('cp node_modules/request/request.js build/javascripts/request.js');
 
 	});
 };
