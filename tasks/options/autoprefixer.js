@@ -1,6 +1,6 @@
 module.exports = {
 	app: {
-		src: 'build/stylesheets/style.css',
-		dest: 'build/stylesheets/style.css'
+		src: 'build/css/style.css',
+		dest: 'build/css/style.css'
 	}
 };

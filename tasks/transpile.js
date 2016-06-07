@@ -6,7 +6,7 @@ var transform = require('es6-module-jstransform');
 var es6transpiler = require('es6-transpiler');
 
 var PATH_TO_JS = path.resolve(process.cwd() + '/app/js');
-var OUTPUT_FILE = path.resolve(process.cwd() + '/build/app.js');
+var OUTPUT_FILE = path.resolve(process.cwd() + '/build/js/app.js');
 
 var LAST_TRANSPILE = 0;
 var MODULE_CACHE = {};
@@ -26,7 +26,7 @@ function compileApp() {
 	fs.appendFileSync(OUTPUT_FILE, 'console.log(\'App Version: ' + getGitHash() + '\');\n\n');
 	concatenateScripts();
 	concatenateModules();
-	fs.appendFileSync(OUTPUT_FILE, '\nrequire(\'app\');');
+	fs.appendFileSync(OUTPUT_FILE, '\nmyrequire(\'app\');');
 }
 
 function getGitHash() {
@@ -90,11 +90,13 @@ function concatenateModules() {
 
 function getModulesNames() {
 	return readdir(PATH_TO_JS).filter(function(name) {
-		if (name.indexOf('scripts/') === 0) {
-			return false;
-		}
+		// if (name.indexOf('scripts/') === 0) {
+		// 	return false;
+		// }
+        //
+		// return name.substring(name.length - 3) === '.js';
+		return name.substring(name.length - 6) === 'app.js';
 
-		return name.substring(name.length - 3) === '.js';
 	}).map(function(name) {
 		return name.substring(0, name.length - 3);
 	});
@@ -144,7 +146,7 @@ function normalizeModuleNames(modulePath, contents) {
 	return contents.replace(requirePattern, function(fullMatch, requiredModulePath) {
 		var fullFilePath = path.resolve(PATH_TO_JS + '/' + modulePath + '/' + requiredModulePath + '.js');
 		var fullModulePath = fullFilePath.substring(PATH_TO_JS.length + 1, fullFilePath.length - 3);
-		return 'require(\'' + fullModulePath + '\')';
+		return 'myrequire(\'' + fullModulePath + '\')';
 	});
 }
 

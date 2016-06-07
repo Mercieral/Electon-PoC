@@ -4,7 +4,7 @@ module.exports = {
 			sourceMap: true
 		},
 		files: {
-			'build/stylesheets/style.css': 'app/css/main.scss'
+			'build/css/style.css': 'app/css/main.scss'
 		}
 	}
 };

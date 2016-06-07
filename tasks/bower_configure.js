@@ -3,7 +3,6 @@ var sh = require('sync-exec');
 var Hanldebars = require('handlebars');
 
 var FULL_RELEASE = [
-	'normalize-css',
 	'handlebars',
 	'ember'
 ];
@@ -11,14 +10,10 @@ var FULL_RELEASE = [
 var FULL_DEVELOP = FULL_RELEASE.slice();
 FULL_DEVELOP.splice(FULL_DEVELOP.indexOf('trackjs'), 1);
 
-var MINIMAL_RELEASE = ['normalize-css', 'jquery', 'trackjs'];
+var MINIMAL_RELEASE = ['jquery', 'trackjs'];
 var MINIMAL_DEVELOP = ['normalize-css', 'jquery'];
 
 var MAIN_FILES = {
-
-	'normalize-css': {
-		css: ['normalize.css']
-	},
 
 	'jquery': {
 		js: ['dist/jquery.js']
@@ -49,17 +44,11 @@ module.exports = function(grunt) {
 	});
 
 	function bowerDevelop(testMode, includeTestem) {
-		concatCss('vendor_full.css', FULL_DEVELOP, false);
-		concatCss('vendor_minimal.css', MINIMAL_DEVELOP, false);
-		concatJs('vendor_minimal.js', MINIMAL_DEVELOP, false);
-
-		var files = getFiles(FULL_DEVELOP, false).js.map(function(file) {
-			return '/' + file;
-		});
-
-		//writeIndexFile(files, testMode, includeTestem);
-
-		sh('cp -r lib build/');
+		// concatCss('vendor_full.css', FULL_DEVELOP, false);
+		// concatCss('vendor_minimal.css', MINIMAL_DEVELOP, false);
+		// concatJs('vendor_minimal.js', MINIMAL_DEVELOP, false);
+        //
+		// sh('cp -r lib build/');
 	}
 
 	grunt.registerTask('bower_debug', function() {
@@ -68,7 +57,7 @@ module.exports = function(grunt) {
 		concatCss('vendor_minimal.css', MINIMAL_RELEASE, false);
 		concatJs('vendor_minimal.js', MINIMAL_RELEASE, false);
 
-		//writeIndexFile(['/javascripts/vendor_full.js']);
+
 	});
 
 	grunt.registerTask('bower_release', function() {
@@ -77,7 +66,7 @@ module.exports = function(grunt) {
 		concatCss('vendor_minimal.css', MINIMAL_RELEASE, true);
 		concatJs('vendor_minimal.js', MINIMAL_RELEASE, true);
 
-		//writeIndexFile(['/javascripts/vendor_full.js']);
+		writeIndexFile(['/js/util//vendor_full.js']);
 	});
 };
 
@@ -89,11 +78,11 @@ function getFiles(include, minified) {
 
 	include.forEach(function(libraryName) {
 		files.js = files.js.concat((MAIN_FILES[libraryName].js || []).map(function(file) {
-			return 'lib/' + libraryName + '/' + file;
+			return 'js/util/' + libraryName + '/' + file;
 		}));
 
 		files.css = files.css.concat((MAIN_FILES[libraryName].css || []).map(function(file) {
-			return 'lib/' + libraryName + '/' + file;
+			return 'js/util/' + libraryName + '/' + file;
 		}));
 	});
 
@@ -113,18 +102,18 @@ function getFiles(include, minified) {
 }
 
 function concatCss(outputFile, include, minified) {
-	fs.writeFileSync('build/stylesheets/' + outputFile, '');
+	fs.writeFileSync('build/css/' + outputFile, '');
 	getFiles(include, minified).css.forEach(function(file) {
-		fs.appendFileSync('build/stylesheets/' + outputFile, fs.readFileSync(file, {encoding: 'utf8'}));
-		fs.appendFileSync('build/stylesheets/' + outputFile, '\n\n');
+		fs.appendFileSync('build/css/' + outputFile, fs.readFileSync(file, {encoding: 'utf8'}));
+		fs.appendFileSync('build/css/' + outputFile, '\n\n');
 	});
 }
 
 function concatJs(outputFile, include, minified) {
-	fs.writeFileSync('build/javascripts/' + outputFile, '');
+	fs.writeFileSync('build/js/util' + outputFile, '');
 	getFiles(include, minified).js.forEach(function(file) {
-		fs.appendFileSync('build/javascripts/' + outputFile, fs.readFileSync(file, {encoding: 'utf8'}));
-		fs.appendFileSync('build/javascripts/' + outputFile, ';\n\n');
+		fs.appendFileSync('build/js/util' + outputFile, fs.readFileSync(file, {encoding: 'utf8'}));
+		fs.appendFileSync('build/js/util' + outputFile, ';\n\n');
 	});
 }
 
@@ -133,12 +122,5 @@ function writeIndexFile(files, testMode, includeTestem) {
 	var template = Hanldebars.compile(fs.readFileSync('app/templates/index.html', {encoding: 'utf8'}));
 	var html = template({files: files, test: !!testMode, testem: !!includeTestem});
 	fs.writeFileSync('build/index.html', html);
-
-    //attempt to use Ember's template compiler to provide Ember helper functionality (ex. link-to)
-    // var compiler = require('ember-template-compiler');
-    // var input = fs.readFileSync('app/templates/index.html', {encoding: 'utf8'})
-    // var template = compiler.EmberHandlebars.compile(input);
-    // var html = template({files: files, test: !!testMode, testem: !!includeTestem});
-    // fs.writeFileSync('build/index.html', template);
 
 }

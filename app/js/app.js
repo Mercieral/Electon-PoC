@@ -3,7 +3,9 @@ let App = window.App = Ember.Application.create({
 
 });
 
-var request = require('request');
+var request = require('request-promise');
+
+App.deferReadiness();
 
 // Router
 App.Router.map(function(){
@@ -12,12 +14,14 @@ App.Router.map(function(){
     this.route('about');
 });
 
-App.DocsController = Ember.ObjectController.extend({
-    test: '123abc',
-    documents: function (){
-        request("http://localhost:3000/documents", function(error, response, val){
-           console.log(val);
-            return 7;
-        });
-    }()
-})
+request({
+    uri: 'http://localhost:3000/documents',
+    json: true
+}).then(function (res){
+    App.DocsController = Ember.ObjectController.extend({
+        documents: res
+    });
+    App.advanceReadiness();
+});
+
+

@@ -15,7 +15,7 @@ Object.defineProperty(window, 'define', {
 	}
 });
 
-Object.defineProperty(window, 'require', {
+Object.defineProperty(window, 'myrequire', {
 	value: function(name) {
 		if (isEvaluating[name]) {
 			throw new Error(`A circular dependency was detected.`);

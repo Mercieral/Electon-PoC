@@ -27,6 +27,6 @@ module.exports = {
 
 	all: {
 		src: TEMPLATE_PATH + '**/*.hbs',
-		dest: 'build/javascripts/templates.js'
+		dest: 'build/js/templates.js'
 	}
 };
